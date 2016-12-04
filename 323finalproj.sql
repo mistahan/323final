@@ -45,27 +45,24 @@ CREATE TABLE special(
 
 CREATE TABLE specialInstance(
     cusID              INTEGER       NOT NULL,
-    lastDateContacted  DATE,
-    EXPERATIONDATE     DATE,
-    specialItem        VARCHAR(20),
+    lastDateContacted  DATE          NOT NULL,
+    specialItem        VARCHAR(20)   NOT NULL,
+    EXPERATIONDATE     DATE          NOT NULL,
     CONSTRAINT prosp_SI_fk FOREIGN KEY (cusID) REFERENCES prospective (cusID),
     CONSTRAINT special_SI_fk FOREIGN KEY (specialItem, EXPERATIONDATE) 
         REFERENCES special (specialItem, EXPERATIONDATE)
 );
 
-
-
-
 CREATE TABLE referal(
     cusID      INTEGER    NOT NULL,
+    prosID     INTEGER    NOT NULL,
     dateSent   DATE       NOT NULL,
-    status     VARCHAR(20),   
-    CONSTRAINT ref_excus_fk FOREIGN KEY (cusID) REFERENCES existingCustomer (cusID)
+    status     VARCHAR(20)        ,
+    CONSTRAINT pk_referal   PRIMARY KEY (cusID, dateSent, prosID),
+    CONSTRAINT ref_excus_fk FOREIGN KEY (cusID) REFERENCES existingCustomer (cusID),
+    CONSTRAINT ref_pros_fk  FOREIGN KEY (prosID) REFERENCES PROSPECTIVE (cusID)
   
 );
-
-
-
 
 CREATE TABLE steady(
     cusID       INTEGER         NOT NULL,
@@ -74,9 +71,6 @@ CREATE TABLE steady(
     CONSTRAINT pk_steady   PRIMARY KEY (cusID),
     CONSTRAINT steady_ecus_fk  FOREIGN KEY (cusID) REFERENCES existingCustomer (cusID)
 );
-
-
-
 
 CREATE TABLE premier(
     cusID       INTEGER    NOT NULL,
@@ -90,12 +84,14 @@ CREATE TABLE corporation(
     address      VARCHAR(40)  NOT NULL,
     typeofAdd    VARCHAR(10)  NOT NULL,
     cusID        INTEGER      NOT NULL,
+    CONSTRAINT pk_CORPORATION   PRIMARY KEY (cusID),
     CONSTRAINT corp_cus_fk  FOREIGN KEY (cusID) REFERENCES customers (cusID)  
 );
 
 CREATE TABLE individual(
     cusID       INTEGER       NOT NULL,
     mailingAdd  VARCHAR(40)   NOT NULL,
+    CONSTRAINT pk_individual   PRIMARY KEY (cusID),
     CONSTRAINT indi_cus_fk  FOREIGN KEY (cusID) REFERENCES customers (cusID)  
 );
 
@@ -103,6 +99,7 @@ CREATE TABLE individual(
 CREATE TABLE appointment(
     cusID       INTEGER       NOT NULL,
     dateSche    DATE          NOT NULL,
+    CONSTRAINT pk_appointment PRIMARY KEY (cusID, dateSche),
     CONSTRAINT app_steady_fk  FOREIGN KEY (cusID) REFERENCES steady (cusID) 
 );
 
@@ -237,7 +234,7 @@ CREATE TABLE repairInstance(
     CONSTRAINT repInst_maitnence_fk FOREIGN KEY (packageID) REFERENCES maitenancePack
 );
 
-
+/*
 
 /*INSERT VALUES FOR DATA*/
 INSERT INTO CUSTOMERS VALUES(001,'Alex Han', '714-444-3211', 'han@alex.com');
@@ -261,7 +258,12 @@ INSERT INTO existingCustomer VALUES (006,'1999-11-25', '09:10:00');
 
 INSERT INTO prospective VALUES (005,'emailed');
 
+INSERT INTO SPECIAL VALUES ('50% OFF SERVICE','2016-12-31');
+INSERT INTO SPECIAL VALUES ('50% OFF PACKAGE','2016-12-31');
+INSERT INTO SPECIAL VALUES ('30% OFF AIR FILTER','2016-12-31');
+INSERT INTO SPECIAL VALUES ('12345678901234567890','2016-12-31');
 
+INSERT INTO specialInstance VALUES (006,'2016-04-12','30% OFF AIR FILTER','2016-12-31'); 
 /*VEWIS*/
 
 /*QUERRIES*/
