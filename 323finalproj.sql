@@ -7,6 +7,7 @@
  *   do we want to carry the cus id all the way down as far as the order line?
  *   
  *   MAITNENCE package ????? issues DOES IT REQUIRE A MANY TO MANY OF EACH ITEM 
+ =
  *   
  */
 CREATE TABLE customers (
@@ -80,12 +81,19 @@ CREATE TABLE premier(
 
 
 CREATE TABLE corporation(
-    address      VARCHAR(40)  NOT NULL,
-    typeofAdd    VARCHAR(10)  NOT NULL,
     cusID        INTEGER      NOT NULL,
     CONSTRAINT pk_CORPORATION   PRIMARY KEY (cusID),
     CONSTRAINT corp_cus_fk  FOREIGN KEY (cusID) REFERENCES customers (cusID)  
 );
+
+CREATE TABLE ADDRESS(
+    cusID        INTEGER      NOT NULL,
+    address      VARCHAR(40)  NOT NULL,
+    typeofAdd    VARCHAR(20)  NOT NULL,
+    CONSTRAINT PK_address PRIMARY KEY (CUSID,ADDRESS),
+    CONSTRAINT add_corp_fk FOREIGN KEY (CUSID) REFERENCES CORPORATION (CUSID)
+);
+    
 
 CREATE TABLE individual(
     cusID       INTEGER       NOT NULL,
@@ -129,7 +137,8 @@ CREATE TABLE notification(
     cusID       INTEGER       NOT NULL,
     VIN         INTEGER       NOT NULL,
     dateSent    DATE          NOT NULL,
-    CONSTRAINT not_veh_fk FOREIGN KEY (VIN) REFERENCES VEHICLE
+    CONSTRAINT not_veh_fk FOREIGN KEY (VIN) REFERENCES VEHICLE (VIN),
+    CONSTRAINT not_steady_fk FOREIGN KEY (CUSID) REFERENCES STEADY (CUSID)
 );
 
 
@@ -232,75 +241,3 @@ CREATE TABLE repairInstance(
     CONSTRAINT repInst_repItem_fk FOREIGN KEY (namItem) REFERENCES repairItems,
     CONSTRAINT repInst_maitnence_fk FOREIGN KEY (packageID) REFERENCES maitenancePack
 );
-
-
-/*
-
-ALTER TABLE existingCustomer
-    DROP CONSTRAINT excus_cus_fk;
-ALTER TABLE prospective
-    DROP CONSTRAINT prosp_cus_fk;
-ALTER TABLE specialInstance
-    DROP CONSTRAINT prosp_SI_fk;
-ALTER TABLE specialInstance
-    DROP CONSTRAINT special_SI_fk;
-ALTER TABLE referal
-    DROP CONSTRAINT ref_excus_fk;
-ALTER TABLE steady
-    DROP CONSTRAINT steady_ecus_fk;
-ALTER TABLE PREMIER
-    DROP CONSTRAINT premier_ecus_fk;
-ALTER TABLE corporation
-    DROP CONSTRAINT corp_cus_fk;
-ALTER TABle individual
-    DROP CONSTRAINT indi_cus_fk;
-ALTER TABLE APPOINTMENT
-    DROP CONSTRAINT app_steady_fk;
-ALTER TABLE VEHICLE
-    DROP CONSTRAINT veh_cus_fk;
-ALTER TABLE ORDERS
-    DROP CONSTRAINT orders_vehivle_fk;
-ALTER TABLE ORDERS
-    DROP CONSTRAINT orders_tech_fk;
-ALTER TABLE notification
-    DROP CONSTRAINT not_veh_fk;
-ALTER TABLE ORDERline
-    DROP CONSTRAINTS oLine_order_fk, oLine_repair_fk;
---ALTER TABLE ORDERline
-  --  DROP CONSTRAINT oLine_repair_fk;
-ALTER TABLE technician
-    DROP CONSTRAINT tech_emp_fk;
-ALTER TABLE mechanic
-    DROP CONSTRAINT mech_emp_fk;
-ALTER TABLE skillMechanic
-    DROP CONSTRAINT skillmech_skill_fk;
-ALTER TABLE skillMechanic
-    DROP CONSTRAINT skillmech_mech_fk;
-ALTER TABLE CERTIFICATION
-    DROP CONSTRAINT cert_mech_fk;
-
-DROP Table Customers;
-DROP Table existingCustomer;
-DROP Table prospective;
-DROP Table specialInstance;
-DROP Table special;
-DROP Table referal;
-DROP TABLE STEADY;
-DROP TABLE PREMIER;
-DROP TABLE corporation;
-DROP TABLE individual;
-DROP TABLE APPOINTMENT;
-DROP TABLE VEHICLE;
-DROP TABLE ORDERS;
-DROP TABLE notification;
-DROP TABLE orderLine;
-DROP TABLE repairItems;
-DROP TABLE EMPLOYEE;
-DROP TABLE technician;
-DROP TABLE mechanic;
-DROP TABLE mentorship;
-DROP TABLE skillMechanic;
-DROP TABLE SKILL;
-DROP TABLE SKILLREPAIR;
-DROP TABLE CERTIFICATION;
-
