@@ -216,6 +216,9 @@ CREATE TABLE maitenancePack(
     packageID    INTEGER          NOT NULL,
     packageName  VARCHAR(20)      NOT NULL,
     numOfItems   INTEGER          NOT NULL,
+    make         VARCHAR(10)      NOT NUll,
+    model        VARCHAR(10)      NOT NULL,
+    milage       INTEGER          NOT NULL,
     CONSTRAINT  PK_MAITNENCEPACK PRIMARY KEY (packageID)
 );
 
