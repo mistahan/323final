@@ -142,10 +142,16 @@ INSERT INTO OrderLine VALUES ('Wiper',2342,3);
 INSERT INTO OrderLine VALUES ('Motor Mounts',7539, 2);
 INSERT INTO OrderLine VALUES ('Struts', 3802,5);
 
+INSERT INTO maitenancePack VALUES  (5425, 'Deluxe', 6, 'honda', 'civic', 600);
+INSERT INTO maitenancePack VALUES  (4322, 'Premium', 3, 'toyota', 'carolla', 200 );
+INSERT INTO maitenancePack VALUES  (5432, 'Basic', 4, 'jaguar', 'f-type', 9000);
 
+INSERT INTO repairInstance VALUES(201,'Wiper',5425);
+INSERT INTO repairInstance VALUES(222,'Motor Mounts',4322);
+INSERT INTO repairInstance VALUES(300,'Struts',5432);
 
-
-
-
+INSERT INTO SKILLREPAIR VALUES (006, 'Wiper');
+INSERT INTO SKILLREPAIR VALUES (006, 'Motor Mounts');
+INSERT INTO SKILLREPAIR VALUES (006, 'Struts');
 
 
