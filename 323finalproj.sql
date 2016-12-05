@@ -27,7 +27,6 @@ CREATE TABLE existingCustomer(
     CONSTRAINT excus_cus_fk  FOREIGN KEY (cusID) REFERENCES customers (cusID)  
 );
 
-
 CREATE TABLE prospective(
     cusID       INTEGER       NOT NULL,
     status      VARCHAR(20),
@@ -35,13 +34,11 @@ CREATE TABLE prospective(
     CONSTRAINT prosp_cus_fk  FOREIGN KEY (cusID) REFERENCES customers (cusID)
 );
 
-
 CREATE TABLE special(
     specialItem     VARCHAR(20)    NOT NULL,
     EXPERATIONDATE  DATE           NOT NULL,
     CONSTRAINT pk_special PRIMARY KEY (specialItem, EXPERATIONDATE)
 );
-
 
 CREATE TABLE specialInstance(
     cusID              INTEGER       NOT NULL,
@@ -79,7 +76,6 @@ CREATE TABLE premier(
     CONSTRAINT premier_ecus_fk  FOREIGN KEY (cusID) REFERENCES existingCustomer (cusID)
 );
 
-
 CREATE TABLE corporation(
     cusID        INTEGER      NOT NULL,
     CONSTRAINT pk_CORPORATION   PRIMARY KEY (cusID),
@@ -92,8 +88,7 @@ CREATE TABLE ADDRESS(
     typeofAdd    VARCHAR(20)  NOT NULL,
     CONSTRAINT PK_address PRIMARY KEY (CUSID,ADDRESS),
     CONSTRAINT add_corp_fk FOREIGN KEY (CUSID) REFERENCES CORPORATION (CUSID)
-);
-    
+);  
 
 CREATE TABLE individual(
     cusID       INTEGER       NOT NULL,
@@ -110,7 +105,6 @@ CREATE TABLE appointment(
     CONSTRAINT app_steady_fk  FOREIGN KEY (cusID) REFERENCES steady (cusID) 
 );
 
-
 CREATE TABLE VEHICLE(
     cusID       INTEGER       NOT NULL,
     VIN         INTEGER       NOT NULL,
@@ -122,7 +116,6 @@ CREATE TABLE VEHICLE(
     CONSTRAINT veh_cus_fk FOREIGN KEY (cusID )REFERENCES customers (cusID)
 );
 
-
 CREATE TABLE orders(
     VIN         INTEGER       NOT NULL,
     empID       INTEGER       NOT NULL,
@@ -132,7 +125,6 @@ CREATE TABLE orders(
     CONSTRAINT  orders_tech_fk FOREIGN KEY(empID) REFERENCES technician (empID)
 );
 
-
 CREATE TABLE notification(
     cusID       INTEGER       NOT NULL,
     VIN         INTEGER       NOT NULL,
@@ -140,7 +132,6 @@ CREATE TABLE notification(
     CONSTRAINT not_veh_fk FOREIGN KEY (VIN) REFERENCES VEHICLE (VIN),
     CONSTRAINT not_steady_fk FOREIGN KEY (CUSID) REFERENCES STEADY (CUSID)
 );
-
 
 CREATE TABLE orderLine(
     namItem     VARCHAR(15)   NOT NULL,
@@ -151,14 +142,12 @@ CREATE TABLE orderLine(
     CONSTRAINT oLine_repair_fk FOREIGN KEY (namItem) REFERENCES repairItems (namItem)
 );
 
-
 CREATE TABLE repairItems(
     namItem       VARCHAR(15)   NOT NULL,
     pricePerItem  DOUBLE                ,
     manufacture   VARCHAR(20)           ,
     CONSTRAINT pk_repairItems PRIMARY KEY (namItem)
 );
-
 
 CREATE TABLE employee(
     empID       INTEGER         NOT NULL,
@@ -168,7 +157,7 @@ CREATE TABLE employee(
     email       VARCHAR(40)     NOT NULL,
     address     VARCHAR(40)     NOT NULL,
     dateHire    DATE            NOT NULL,
-    dateEnd     DATE            NOT NULL,
+    dateEnd     DATE                    ,
     CONSTRAINT pk_employee PRIMARY KEY (empID)
 );
 
@@ -184,6 +173,7 @@ CREATE TABLE mechanic(
     CONSTRAINT pk_mechanic PRIMARY KEY (empID),
     CONSTRAINT mech_emp_fk FOREIGN KEY (EMPID) REFERENCES employee(empID)
 );
+
 CREATE TABLE mentorship(
     empID       INTEGER         NOT NULL,
     mentorID    INTEGER         NOT NULL,
@@ -194,7 +184,6 @@ CREATE TABLE mentorship(
     CONSTRAINT  ment_mech_fk    FOREIGN KEY (empID) REFERENCES mechanic
 );
 
-
 CREATE TABLE skillMechanic(
     empID       INTEGER         NOT NULL,
     skillID     INTEGER         NOT NULL,
@@ -202,7 +191,6 @@ CREATE TABLE skillMechanic(
     CONSTRAINT skillmech_skill_fk FOREIGN KEY (skillID) REFERENCES SKILL, 
     CONSTRAINT skillmech_mech_fk  FOREIGN KEY (empID)   REFERENCES mechanic
 );
-
 
 CREATE TABLE skill(
     skillID     INTEGER         NOT NULL,
@@ -225,14 +213,13 @@ CREATE TABLE CERTIFICATION (
     expireDate     DATE            NOT NULL,
     CONSTRAINT  cert_mech_fk    FOREIGN KEY (empID) REFERENCES mechanic
 );
+
 CREATE TABLE maitenancePack(
     packageID    INTEGER          NOT NULL,
     packageName  VARCHAR(20)      NOT NULL,
     numOfItems   INTEGER          NOT NULL,
     CONSTRAINT  PK_MAITNENCEPACK PRIMARY KEY (packageID)
 );
-    
-    
 
 CREATE TABLE repairInstance(
     price        DOUBLE           NOT NULL,
@@ -241,3 +228,4 @@ CREATE TABLE repairInstance(
     CONSTRAINT repInst_repItem_fk FOREIGN KEY (namItem) REFERENCES repairItems,
     CONSTRAINT repInst_maitnence_fk FOREIGN KEY (packageID) REFERENCES maitenancePack
 );
+
