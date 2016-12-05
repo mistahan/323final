@@ -145,6 +145,9 @@ INSERT INTO OrderLine VALUES ('Struts', 3802,5);
 INSERT INTO maitenancePack VALUES  (5425, 'Deluxe', 6, 'honda', 'civic', 600);
 INSERT INTO maitenancePack VALUES  (4322, 'Premium', 3, 'toyota', 'carolla', 200 );
 INSERT INTO maitenancePack VALUES  (5432, 'Basic', 4, 'jaguar', 'f-type', 9000);
+INSERT INTO maitenancePack VALUES  (5425, 'Deluxe1',6, 'Ford',  'Taurus', 60,000);
+INSERT INTO maitenancePack VALUES  (4322, 'Premium1',3, 'Toyota', 'Celica',20,000);
+INSERT INTO maitenancePack VALUES  (5432, 'Basic1',4, 'Mitsubishi', ' Eclipse',70,000);
 
 INSERT INTO repairInstance VALUES(201,'Wiper',5425);
 INSERT INTO repairInstance VALUES(222,'Motor Mounts',4322);
