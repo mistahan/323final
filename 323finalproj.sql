@@ -10,6 +10,7 @@
  =
  *   
  */
+
 CREATE TABLE customers (
     cusID       INTEGER         NOT NULL,
     Name        VARCHAR(20)     NOT NULL,
@@ -117,10 +118,11 @@ CREATE TABLE VEHICLE(
 );
 
 CREATE TABLE orders(
+    empID       INTEGER       NOT NULL,    
+    orderID     INTEGER       NOT NULL,
     VIN         INTEGER       NOT NULL,
-    empID       INTEGER       NOT NULL,
     orderDate   DATE          NOT NULL,
-    CONSTRAINT pk_orders PRIMARY KEY (VIN, orderDate),
+    CONSTRAINT pk_orders PRIMARY KEY (ORDERID),
     CONSTRAINT  orders_vehivle_fk FOREIGN KEY(VIN) REFERENCES vehicle (VIN),
     CONSTRAINT  orders_tech_fk FOREIGN KEY(empID) REFERENCES technician (empID)
 );
@@ -135,10 +137,10 @@ CREATE TABLE notification(
 
 CREATE TABLE orderLine(
     namItem     VARCHAR(15)   NOT NULL,
-    VIN         INTEGER       NOT NULL,
+    orderID     INTEGER       NOT NULL,
     orderDate   DATE          NOT NULL,
     numRepItem  INTEGER               ,
-    CONSTRAINT oLine_order_fk FOREIGN KEY (VIN,orderDate) REFERENCES ORDERS (VIN, ORDERDATE),
+    CONSTRAINT oLine_order_fk FOREIGN KEY (orderID) REFERENCES ORDERS (orderID),
     CONSTRAINT oLine_repair_fk FOREIGN KEY (namItem) REFERENCES repairItems (namItem)
 );
 
@@ -181,7 +183,7 @@ CREATE TABLE mentorship(
     endDate     DATE            NOT NULL,
     skillMent   VARCHAR(20)     NOT NULL,
     CONSTRAINT  pk_mentorship   PRIMARY KEY (empID, MentorID),
-    CONSTRAINT  ment_mech_fk    FOREIGN KEY (empID) REFERENCES mechanic
+    CONSTRAINT  ment_mech_fk    FOREIGN KEY (empID) REFERENCES mechanic (empID)
 );
 
 CREATE TABLE skillMechanic(
@@ -207,8 +209,6 @@ CREATE TABLE skillRepair(
 
 CREATE TABLE CERTIFICATION (
     empID          INTEGER         NOT NULL,
-    FName          VARCHAR(20)     NOT NULL,
-    lname          VARCHAR(20)     NOT NULL,
     dateRecived    DATE            NOT NULL,
     expireDate     DATE            NOT NULL,
     CONSTRAINT  cert_mech_fk    FOREIGN KEY (empID) REFERENCES mechanic
