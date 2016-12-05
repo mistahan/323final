@@ -138,15 +138,13 @@ CREATE TABLE notification(
 CREATE TABLE orderLine(
     namItem     VARCHAR(15)   NOT NULL,
     orderID     INTEGER       NOT NULL,
-    orderDate   DATE          NOT NULL,
-    numRepItem  INTEGER               ,
+    numRepItem  INTEGER       NOT NULL,
     CONSTRAINT oLine_order_fk FOREIGN KEY (orderID) REFERENCES ORDERS (orderID),
     CONSTRAINT oLine_repair_fk FOREIGN KEY (namItem) REFERENCES repairItems (namItem)
 );
 
 CREATE TABLE repairItems(
     namItem       VARCHAR(15)   NOT NULL,
-    pricePerItem  DOUBLE                ,
     manufacture   VARCHAR(20)           ,
     CONSTRAINT pk_repairItems PRIMARY KEY (namItem)
 );
