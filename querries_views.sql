@@ -39,3 +39,8 @@ SELECT * FROM maitenancePack;
 SELECT * FROM repairInstance;
 SELECT * FROM SKILLREPAIR;
 
+
+
+--15
+SELECT empID, fname, lname from employee natural join technician natural join 
+        mechanic;
