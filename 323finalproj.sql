@@ -1,3 +1,4 @@
+
 /*TABLES TO AND CONSTRAINTS FOR THE DATAT BASE*/
 
 
@@ -7,9 +8,6 @@
  *   do we want to carry the cus id all the way down as far as the order line?
  *   
  *   MAITNENCE package ????? issues DOES IT REQUIRE A MANY TO MANY OF EACH ITEM 
- *         - switch the maitnence package and repair item. 
- *   look in to re creating some tables to fit some of the requested querries that 
- *    dave gave us. 
  =
  *   
  */
@@ -139,11 +137,11 @@ CREATE TABLE notification(
 );
 
 CREATE TABLE orderLine(
-    namItem     VARCHAR(15)   NOT NULL,
+    packageID   INTEGER       NOT NULL,
     orderID     INTEGER       NOT NULL,
     numRepItem  INTEGER       NOT NULL,
     CONSTRAINT oLine_order_fk FOREIGN KEY (orderID) REFERENCES ORDERS (orderID),
-    CONSTRAINT oLine_repair_fk FOREIGN KEY (namItem) REFERENCES repairItems (namItem)
+    CONSTRAINT oLine_repair_fk FOREIGN KEY (packageID) REFERENCES maitenancePack (packageID)
 );
 
 CREATE TABLE repairItems(
@@ -203,8 +201,8 @@ CREATE TABLE skill(
 
 CREATE TABLE skillRepair(
     skillID     INTEGER         NOT NULL,
-    namItem     VARCHAR(15)     NOT NULL,
-    CONSTRAINT skillrep_repair_fk FOREIGN KEY (namItem) REFERENCES repairItems (namItem),
+    packageID   INTEGER         NOT NULL,
+    CONSTRAINT skillrep_repair_fk FOREIGN KEY (packageID) REFERENCES maitenancePack (packageID),
     CONSTRAINT skillrep_skill_fk  FOREIGN KEY (skillID) REFERENCES skill (skillID)
 );
 
