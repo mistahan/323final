@@ -204,8 +204,9 @@ CREATE TABLE skill(
 );
 
 CREATE TABLE skillRepair(
-    skillID     INTEGER         NOT NULL,
-    packageID   INTEGER         NOT NULL,
+    skillID       INTEGER         NOT NULL,
+    packageID     INTEGER         NOT NULL,
+    dateAqurired  DATE                    ,
     CONSTRAINT skillrep_repair_fk FOREIGN KEY (packageID) REFERENCES maitenancePack (packageID),
     CONSTRAINT skillrep_skill_fk  FOREIGN KEY (skillID) REFERENCES skill (skillID)
 );

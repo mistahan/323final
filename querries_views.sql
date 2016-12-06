@@ -46,13 +46,6 @@ SELECT * FROM MECHANIC;
 SELECT * FROM skillMechanic;
 SELECT * FROM SKILLREPAIR;
 
-select mechanic.EMPID, skill.SKILLNAME  from mechanic
-    natural join skillmechanic
-    natural join skill
-except
-select  map.PACKAGEID, skill.SKILLNAME from maitenancePack map
-    natural join skillRepair
-    natural join skill;
 
 
 
@@ -99,7 +92,7 @@ SELECT   SUM(repI.PRICE), CUS."NAME" FROM CUSTOMERS CUS
     inner join orderline oli on(ord.ORDERID = oli.ORDERID)
     inner join maitenancePack map on(oli.PACKAGEID = map.PACKAGEID)
     inner join repairinstance repI on (map.PACKAGEID = repI.PACKAGEID)
-    where ord.ORDERDATE between '2016-01-01' and '2016-12-31'
+    where ord.ORDERDATE between '2014-01-01' and '2016-12-31'
     group by CUS."NAME" order by CUS."NAME" desc FETCH FIRST 3 ROWS ONLY;
     
 --4
