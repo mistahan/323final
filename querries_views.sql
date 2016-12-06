@@ -49,7 +49,14 @@ SELECT * FROM SKILLREPAIR;
 --2
     CREATE VIEW Customer_addresses_v AS SELECT * From customers;
 --3
-    CREATE VIEW Mechanic_mentor_v  AS SELECT * From customers;
+    CREATE VIEW Mechanic_mentor_v  AS 
+        SELECT E.FNAME as"fmento", E.lName AS "mento",M.FNAME AS "fmente",
+        M.lName AS "mente"
+        FROM mechanic E LEFT OUTER JOIN 
+          (mentorship S INNER JOIN mechanic M 
+            ON S.mentorID = M.empID)
+          ON E.empID = S.empID
+        ORDER BY E.lName;
 --4
     CREATE VIEW Premier_profits_v  AS SELECT * From customers;
 --5
@@ -57,7 +64,12 @@ SELECT * FROM SKILLREPAIR;
 
 /*quierries*/
 --1
-
+  SELECT E.lName AS "mento", M.lName AS "mente"
+        FROM mechanic E LEFT OUTER JOIN 
+          (mentorship S INNER JOIN mechanic M 
+            ON S.mentorID = M.empID)
+          ON E.empID = S.empID
+        ORDER BY E.lName;
 --2
 
 --3

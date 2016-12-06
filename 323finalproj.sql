@@ -1,4 +1,3 @@
-
 /*TABLES TO AND CONSTRAINTS FOR THE DATAT BASE*/
 
 
@@ -159,20 +158,24 @@ CREATE TABLE employee(
     address     VARCHAR(40)     NOT NULL,
     dateHire    DATE            NOT NULL,
     dateEnd     DATE                    ,
-    CONSTRAINT pk_employee PRIMARY KEY (empID)
+    CONSTRAINT pk_employee PRIMARY KEY (empID, fname, lname)
 );
 
 CREATE TABLE technician(
     empID       INTEGER         NOT NULL,
+    FName       VARCHAR(20)     NOT NULL,
+    lname       VARCHAR(20)     NOT NULL, 
     status      VARCHAR(10)             ,
     CONSTRAINT pk_technician PRIMARY KEY (EMPID),
-    CONSTRAINT tech_emp_fk FOREIGN KEY (EMPID) REFERENCES employee(empID)
+    CONSTRAINT tech_emp_fk FOREIGN KEY (EMPID,FNAME,LNAME) REFERENCES employee(EMPID,FNAME,LNAME)
 );
     
 CREATE TABLE mechanic(
     empID       INTEGER         NOT NULL,
+    FName       VARCHAR(20)     NOT NULL,
+    lname       VARCHAR(20)     NOT NULL, 
     CONSTRAINT pk_mechanic PRIMARY KEY (empID),
-    CONSTRAINT mech_emp_fk FOREIGN KEY (EMPID) REFERENCES employee(empID)
+    CONSTRAINT mech_emp_fk FOREIGN KEY (EMPID,FNAME,LNAME) REFERENCES employee(EMPID,FNAME,LNAME)
 );
 
 CREATE TABLE mentorship(
@@ -182,7 +185,8 @@ CREATE TABLE mentorship(
     endDate     DATE            NOT NULL,
     skillMent   VARCHAR(20)     NOT NULL,
     CONSTRAINT  pk_mentorship   PRIMARY KEY (empID, MentorID),
-    CONSTRAINT  ment_mech_fk    FOREIGN KEY (empID) REFERENCES mechanic (empID)
+    CONSTRAINT  ment_mech_fk    FOREIGN KEY (empID) REFERENCES mechanic (empID),
+    CONSTRAINT  ment1_mech_fk   FOREIGN KEY (mentorID) REFERENCES MECHANIC (EMPID)
 );
 
 CREATE TABLE skillMechanic(
