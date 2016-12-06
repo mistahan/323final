@@ -75,7 +75,12 @@ SELECT * FROM SKILLREPAIR;
 --3
 
 --4
-
+SELECT DISTINCT fname, lname, COUNT(skillName)
+From (employee NATURAL JOIN mechanic 
+               NATURAL JOIN skillMechanic 
+               NATURAL JOIN skill)
+GROUP BY fname, lname
+HAVING COUNT(skillName) > 2;
 --5
 
 --6
