@@ -7,6 +7,9 @@
  *   do we want to carry the cus id all the way down as far as the order line?
  *   
  *   MAITNENCE package ????? issues DOES IT REQUIRE A MANY TO MANY OF EACH ITEM 
+ *         - switch the maitnence package and repair item. 
+ *   look in to re creating some tables to fit some of the requested querries that 
+ *    dave gave us. 
  =
  *   
  */
