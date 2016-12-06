@@ -138,23 +138,27 @@ INSERT INTO repairItems VALUES ('Wiper', 'General Motors');
 INSERT INTO repairItems VALUES ('Motor Mounts', 'OREILLY');
 INSERT INTO repairItems VALUES ('Struts', 'LEEDS' );
 
-INSERT INTO OrderLine VALUES ('Wiper',2342,3);
-INSERT INTO OrderLine VALUES ('Motor Mounts',7539, 2);
-INSERT INTO OrderLine VALUES ('Struts', 3802,5);
 
 INSERT INTO maitenancePack VALUES  (5425, 'Deluxe', 6, 'honda', 'civic', 600);
 INSERT INTO maitenancePack VALUES  (4322, 'Premium', 3, 'toyota', 'carolla', 200 );
 INSERT INTO maitenancePack VALUES  (5432, 'Basic', 4, 'jaguar', 'f-type', 9000);
-INSERT INTO maitenancePack VALUES  (5425, 'Deluxe1',6, 'Ford',  'Taurus', 60,000);
-INSERT INTO maitenancePack VALUES  (4322, 'Premium1',3, 'Toyota', 'Celica',20,000);
-INSERT INTO maitenancePack VALUES  (5432, 'Basic1',4, 'Mitsubishi', ' Eclipse',70,000);
+INSERT INTO maitenancePack VALUES  (1230, 'Deluxe1',6, 'Ford',  'Taurus', 60000);
+INSERT INTO maitenancePack VALUES  (1542, 'Premium1',3, 'Toyota', 'Celica',20000);
+INSERT INTO maitenancePack VALUES  (9632, 'Basic1',4, 'Mitsubishi', ' Eclipse',70000);
+
+INSERT INTO OrderLine VALUES (5425, 2342, 3);
+INSERT INTO OrderLine VALUES (4322, 7539, 2);
+INSERT INTO OrderLine VALUES (5432, 3802, 5);
 
 INSERT INTO repairInstance VALUES(201,'Wiper',5425);
 INSERT INTO repairInstance VALUES(222,'Motor Mounts',4322);
 INSERT INTO repairInstance VALUES(300,'Struts',5432);
 
-INSERT INTO SKILLREPAIR VALUES (006, 'Wiper');
-INSERT INTO SKILLREPAIR VALUES (006, 'Motor Mounts');
-INSERT INTO SKILLREPAIR VALUES (006, 'Struts');
+INSERT INTO SKILLREPAIR VALUES (006, 5425);
+INSERT INTO SKILLREPAIR VALUES (002, 5425);
+INSERT INTO SKILLREPAIR VALUES (003, 5425);
+INSERT INTO SKILLREPAIR VALUES (004, 5425);
+INSERT INTO SKILLREPAIR VALUES (006, 4322);
+INSERT INTO SKILLREPAIR VALUES (006, 5432);
 
 
