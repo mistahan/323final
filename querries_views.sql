@@ -139,7 +139,15 @@ order by loyalpoint DESC;
 --9??
 
 --10
-
+select CUS."NAME", sum(repI.price) as "price" from customers CUS
+    NATURAL JOIN VEHICLE
+    NATURAL JOIN ORDERS ord
+    inner join orderline oli on(ord.ORDERID = oli.ORDERID)
+    inner join maitenancePack map on(oli.PACKAGEID = map.PACKAGEID)
+    inner join repairinstance repI on (map.PACKAGEID = repI.PACKAGEID)
+    where ord.ORDERDATE between '2016-01-01' and '2016-12-31'
+    group by CUS."NAME" order by CUS."NAME" desc;
+    
 --11
 SELECT rep.NAMITEM, ord.ORDERDATE, count(rep.NAMITEM) as "number" from orders ord 
     inner join orderline oli on(ord.ORDERID = oli.ORDERID)
