@@ -70,6 +70,11 @@ SELECT * FROM SKILLREPAIR;
             ON S.mentorID = M.empID)
           ON E.empID = S.empID
         ORDER BY E.lName;
+--1
+SELECT Name, phone, email, mailingAdd AS "ADDRESS",'Home' AS "Type of Address", 'Individual' AS "Type of Customer"  FROM customers NATURAL JOIN individual
+UNION
+SELECT Name, phone, email, address AS "ADDRESS", typeOfAdd AS "Type of Address",'Corporation' AS "Type of Customer" FROM customers NATURAL JOIN corporation NATURAL JOIN ADDRESS;
+
 --2
 
 --3
